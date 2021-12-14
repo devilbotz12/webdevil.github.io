@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<style>
+/*================================================
+
+General
+
+================================================*/
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  background-color: #000;
+  height: 100%;
+}
+
+body {
+  background: #222;
+  background: radial-gradient(#333, #111);
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: #fff;
+  font: 100%/1.5 sans-serif;
+  overflow: hidden;
+}
+
+/*================================================
+
+Score
+
+================================================*/
+
+.score {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 16px;
+  font-weight: bold;
+
+</style>
+
+<div class="score">0</div>
+<div class="stage"></div>
+
+</body>
+<script>
+    this.createBoardTiles();
+    this.bindEvents();
+    this.snake = new g.Snake({
+      parentState: this
+    });
+    this.food = new g.Food({
+      parentState: this
+    });
+  };
+
+  StatePlay.prototype.getDimensions = function() {
+    this.winWidth = window.innerWidth;
+    this.winHeight = window.innerHeight;
+    this.activeWidth = this.winWidth - ( this.winWidth * this.padding );
+    this.activeHeight = this.winHeight - ( this.winHeight * this.padding );
+  };
+
+  StatePlay.prototype.resize = function() {
+    var _this = g.currentState();
+
+    _this.getDimensions();
+
+    _this.stageRatio = _this.rows / _this.cols;
+
+    if( _this.activeWidth > _this.activeHeight / _this.stageRatio ) {
+      _this.stageHeight = _this.activeHeight;
+      _this.stageElem.style.height = _this.stageHeight + 'px';
+      _this.stageWidth = Math.floor( _this.stageHeight /_this.stageRatio );
+      _this.stageElem.style.width = _this.stageWidth + 'px';
+    } else {
+      _this.stageWidth = _this.activeWidth;
+      _this.stageElem.style.width = _this.stageWidth + 'px';
+      _this.stageHeight = Math.floor( _this.stageWidth * _this.stageRatio );
+      _this.stageElem.style.height = _this.stageHeight + 'px';
+    }
+
+    _this.tileWidth = ~~( _this.stageWidth / _this.cols );
+    _this.tileHeight = ~~( _this.stageHeight / _this.rows );
+    _this.dimAvg = ( _this.activeWidth + _this.activeHeight ) / 2;
+    _this.spacing = Math.max( 1, ~~( _this.dimAvg * 0.0025 ) );
+
+    _this.stageElem.style.marginTop = ( -_this.stageElem.offsetHeight / 2 ) + _this.headerHeight / 2 + 'px';
+
+    _this.boardTiles.each( 'updateDimensions' );
+    _this.snake !== undefined && _this.snake.updateDimensions();
+    _this.food !== undefined && _this.food.updateDimensions();
+  };
+
+  <!-- By depil (habibi). -->
+
+</body>
+
+</html>
